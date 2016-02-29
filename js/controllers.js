@@ -1,28 +1,3 @@
-// My Module
-var weatherApp = angular.module('weatherApp', ['ngRoute', 'ngResource']);
-
-// Routes
-weatherApp.config(function ($routeProvider) {
-	$routeProvider
-		.when('/', {
-			templateUrl: 'pages/home.htm'
-			, controller: 'homeController'
-		})
-		.when('/forecast', {
-			templateUrl: 'pages/forecast.htm'
-			, controller: 'forecastController'
-		})
-		.when('/forecast/:days', {
-			templateUrl: 'pages/forecast.htm'
-			, controller: 'forecastController'
-		})
-});
-
-// Services
-weatherApp.service('cityService', function () {
-	this.city = 'New York, NY'
-});
-
 // Controllers
 weatherApp.controller('homeController', ['$scope', 'cityService', function ($scope, cityService) {
 	$scope.city = cityService.city;
@@ -52,18 +27,3 @@ weatherApp.controller('forecastController', ['$scope', '$resource', '$routeParam
 		return new Date(dt * 1000);
 	}
 }]);
-
-// DIRECTIVES
-weatherApp.directive("weatherReport", function () {
-	return {
-		restrict: 'E'
-		, templateUrl: 'directives/weatherReport.htm'
-		, replace: true
-		, scope: {
-			weatherDay: "="
-			, convertToStandard: "&"
-			, convertToDate: "&"
-			, dateFormat: "@"
-		}
-	}
-});
